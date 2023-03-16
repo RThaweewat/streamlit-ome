@@ -7,6 +7,7 @@ import io
 import cv2
 import numpy as np
 import requests
+import pandas as pd
 
 # Download the file from GitHub
 model_url = "https://github.com/RThaweewat/streamlit-ome/blob/main/pretrained.pt?raw=true"
@@ -69,9 +70,11 @@ def predict(image, model, class_labels):
 
 
 # Streamlit app
-st.title("Image Classification with TIMM PyTorch Model")
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+st.title("OME Classification V0.1")
+st.subheader('For Academic Use Only - Please do not distribute without permission')
 
+
+uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 class_labels = ['aom', 'normal', 'ome', 'prev_ome']
 
 if uploaded_file is not None:
@@ -85,3 +88,9 @@ if uploaded_file is not None:
         st.subheader("Class probabilities")
         for class_label, score in class_probabilities.items():
             st.write(f"{class_label}: {score:.4f}")
+
+    # Create a DataFrame from the class_probabilities dictionary
+    df_class_probabilities = pd.DataFrame([class_probabilities], columns=class_probabilities.keys())
+
+    # Display the DataFrame in Streamlit
+    st.dataframe(df_class_probabilities)
