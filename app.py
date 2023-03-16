@@ -6,7 +6,6 @@ from PIL import Image
 import io
 import cv2
 import numpy as np
-
 import requests
 
 def download_file_from_google_drive(file_id, destination):
