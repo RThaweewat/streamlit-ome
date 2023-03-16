@@ -23,7 +23,8 @@ model.eval()
 
 
 def auto_crop_circle_image(image):
-    img = cv2.imread(image, cv2.IMREAD_COLOR)
+    # Convert PIL.Image to a NumPy array and BGR format
+    img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (5, 5), 0)
 
