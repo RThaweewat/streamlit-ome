@@ -3,5 +3,5 @@ torch==2.0.0
 timm==0.6.12
 torchvision==0.15.1
 Pillow==9.0.1
-opencv-python==4.6.0.66
+opencv-python-headless==4.5.3.56
 numpy==1.22.3
