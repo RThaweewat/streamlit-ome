@@ -70,8 +70,8 @@ def predict(image, model, class_labels):
 
 
 # Streamlit app
-st.title("OME Classification V0.1")
-st.caption('For Academic Use Only - Please do not distribute without permission')
+st.title("OME Classification V 0.1")
+st.caption(':red[For Academic Use Only] - Please do not distribute without permission')
 
 
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
@@ -83,6 +83,14 @@ if uploaded_file is not None:
     st.write("")
     if st.button("Classify"):
         class_probabilities = predict(image, model, class_labels)
+        # Find the class label with the highest probability
+        max_class_label = max(class_probabilities, key=class_probabilities.get)
+        max_probability = class_probabilities[max_class_label]
+
+        # Display the class label and probability using st.header
+        st.caption(f"The highest probability class is '{max_class_label}' with a probability of {max_probability:.4f}")
+
         # Create a DataFrame from the class_probabilities dictionary
         df_class_probabilities = pd.DataFrame([class_probabilities], columns=class_probabilities.keys())
         st.dataframe(df_class_probabilities)
+
