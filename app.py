@@ -38,13 +38,13 @@ def save_response_content(response, destination):
 
 # Download the model file
 file_id = "1_8KWfmN6hf4vRcBFqGrHFtwS33Nxg37P"
-model_path = "model.pth"
+model_path = "model.pt"
 download_file_from_google_drive(file_id, model_path)
 
 # Load the trained model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = timm.create_model("convnext_tiny", pretrained=False, num_classes=4)
-model.load_state_dict(torch.load("/models/pretrained.pt", map_location=device))
+model.load_state_dict(torch.load("model.pt", map_location=device))
 model.to(device)
 model.eval()
 
