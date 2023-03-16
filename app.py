@@ -44,23 +44,20 @@ def auto_crop_circle_image(image):
     cv2.circle(mask, (radius, radius), radius, (255, 255, 255), -1)
 
     masked_img = cv2.bitwise_and(cropped_img, mask)
-    return masked_img
+    masked_img = Image.fromarray(masked_img)
 
-
-# Define the required preprocessing transformations
-def preprocess_image(image):
     transform = transforms.Compose([
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    transforms.Resize(256),
+    transforms.CenterCrop(224),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
-    return transform(image).unsqueeze(0)
+    return transform(masked_img).unsqueeze(0)
 
 
 # Define the prediction function
 def predict(image, model, class_labels):
-    image_tensor = preprocess_image(auto_crop_circle_image(image)).to(device)
+    image_tensor = (auto_crop_circle_image(image)).to(device)
     with torch.no_grad():
         outputs = model(image_tensor)
         _, predicted = torch.max(outputs, 1)
