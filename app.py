@@ -74,7 +74,7 @@ st.title("OME Classification V 0.1")
 st.caption(':red[For Academic Use Only] - Please do not distribute without permission')
 
 
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"], label_visibility='hidden')
 class_labels = ['aom', 'normal', 'ome', 'prev_ome']
 
 if uploaded_file is not None:
