@@ -6,13 +6,18 @@ from PIL import Image
 import io
 import cv2
 import numpy as np
+import requests
+
+# Download the file from GitHub
+model_url = "https://github.com/RThaweewat/streamlit-ome/blob/main/pretrained.pt?raw=true"
+response = requests.get(model_url)
+response.raise_for_status()
 
 
-# Load the trained model
+# Load the model from the downloaded content
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = timm.create_model("convnext_tiny", pretrained=False, num_classes=4)
-PATH = "pretrained.pt"
-model.load_state_dict(torch.load(PATH, map_location=device))
+model.load_state_dict(torch.load(io.BytesIO(response.content), map_location=device))
 model.to(device)
 model.eval()
 
