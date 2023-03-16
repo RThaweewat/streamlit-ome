@@ -67,7 +67,7 @@ def predict(image, model, class_labels):
 st.title("Image Classification with TIMM PyTorch Model")
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
-class_labels = ['class_1', 'class_2', 'class_3', 'class_4']  # Replace with your class labels
+class_labels = ['aom', 'normal', 'ome', 'prev_ome']
 
 if uploaded_file is not None:
     image = Image.open(io.BytesIO(uploaded_file.getvalue()))
