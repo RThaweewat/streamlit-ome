@@ -71,7 +71,7 @@ def predict(image, model, class_labels):
 
 # Streamlit app
 st.title("OME Classification V0.1")
-st.subheader('For Academic Use Only - Please do not distribute without permission')
+st.caption('For Academic Use Only - Please do not distribute without permission')
 
 
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
@@ -81,16 +81,8 @@ if uploaded_file is not None:
     image = Image.open(io.BytesIO(uploaded_file.getvalue()))
     st.image(image, caption="Uploaded image", use_column_width=True)
     st.write("")
-
     if st.button("Classify"):
         class_probabilities = predict(image, model, class_labels)
-
-        st.subheader("Class probabilities")
-        for class_label, score in class_probabilities.items():
-            st.write(f"{class_label}: {score:.4f}")
-
-    # Create a DataFrame from the class_probabilities dictionary
-    df_class_probabilities = pd.DataFrame([class_probabilities], columns=class_probabilities.keys())
-
-    # Display the DataFrame in Streamlit
-    st.dataframe(df_class_probabilities)
+        # Create a DataFrame from the class_probabilities dictionary
+        df_class_probabilities = pd.DataFrame([class_probabilities], columns=class_probabilities.keys())
+        st.dataframe(df_class_probabilities)
