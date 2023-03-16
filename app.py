@@ -11,7 +11,8 @@ import numpy as np
 # Load the trained model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = timm.create_model("convnext_tiny", pretrained=False, num_classes=4)
-model.load_state_dict(torch.load("pretrained.pt", map_location=device))
+PATH = "pretrained.pt"
+model.load_state_dict(torch.load(PATH, map_location=device))
 model.to(device)
 model.eval()
 
