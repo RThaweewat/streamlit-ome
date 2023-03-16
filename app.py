@@ -88,7 +88,7 @@ if uploaded_file is not None:
         max_probability = class_probabilities[max_class_label]
 
         # Display the class label and probability using st.header
-        st.caption(f"The highest probability class is '{max_class_label}' with a probability of {max_probability:.4f}")
+        st.markdown(f"The highest probability class is **:blue[{max_class_label}]** with a probability of **:blue[{max_probability:.4f}]**")
 
         # Create a DataFrame from the class_probabilities dictionary
         df_class_probabilities = pd.DataFrame([class_probabilities], columns=class_probabilities.keys())
